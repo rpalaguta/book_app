@@ -1,8 +1,9 @@
 ### Užduotis
 
 - Sukurti migraciją lentoms:
-    - books
     - categories
+    - authors
+    - books
     - authors
     - book_comments
     

@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\HomeController as Admin;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +19,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/home', '/');
+
+Route::get('/', [HomeController::class, 'index']);
+
+Auth::routes();
+
+Route::get('/admin', [Admin::class, 'index']);
+Route::get('/admin/book', [BookController::class, 'index']);
+
+Route::get('/admin/category', [CategoryController::class, 'list']);
+Route::get('/admin/category/create', [CategoryController::class, 'create']);
+Route::post('/admin/category/create', [CategoryController::class, 'create']);
+
+Route::get('/admin/author', [AuthorController::class, 'index']);
