@@ -16,6 +16,7 @@ BookApp - perskaitytu knygų marketplace'as.
         - Pavadinimą
         - IBAN
         - Kategoriją
+        - Autoriu
     - Naujausios knygos
     - Naujausios parduotos knygos
     - Naujausios ieškomos knygos
@@ -33,7 +34,9 @@ BookApp - perskaitytu knygų marketplace'as.
 #### Admin dalis
 
 - Prisijungęs vartotojas su admin teisėmis, gali:
-    - Sukurti knygą
+    - Sukurti knygą, priskirti kategoriją(-as), priskirti autorių(-ius)
+    - Sukurti naują kategoriją
+    - Sukurti naują autorių
     - Redaguoti esamą knygą
     - Ištrinti knygą (soft delete)
     - Peržiūrėti registruotus vartotojus, sukurti naują, redaguoti, blokuoti, ištrinti vartotoją

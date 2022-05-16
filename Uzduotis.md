@@ -2,6 +2,8 @@
 
 - Sukurti migraciją lentoms:
     - books
+    - categories
+    - authors
     - book_comments
     
 - Sukurti Controller'į Admin/BookController
