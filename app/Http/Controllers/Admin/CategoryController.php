@@ -4,18 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
 
 class CategoryController extends Controller
 {
-    public function list()
+    public function list(): View
     {
         $categories = Category::all();
 
         return view('admin.category.list', compact('categories'));
     }
 
-    public function create(Request $request)
+    public function create(Request $request): RedirectResponse|View
     {
         if ($request->isMethod('post')) {
             $validated = $request->validate([
