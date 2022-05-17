@@ -35,3 +35,7 @@ Route::post('/admin/category/create', [CategoryController::class, 'create']);
 Route::get('/admin/author', [AuthorController::class, 'list']);
 Route::get('/admin/author/create', [AuthorController::class, 'create'])->name('admin.author.create');
 Route::post('/admin/author/create', [AuthorController::class, 'create'])->name('admin.author.create');
+
+Route::get('/admin/book', [BookController::class, 'list']);
+Route::get('/admin/book/create', [BookController::class, 'create']);
+Route::post('/admin/book/create', [BookController::class, 'create']);

@@ -39,6 +39,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('admin/author') }}">Author</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('admin/book') }}">Book</a>
+                        </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
