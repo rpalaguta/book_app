@@ -23,11 +23,11 @@
             <tr>
                 <td>{{ $book->id }}</td>
                 <td>
-                    @if($book->getCategoryName)
-                        {{ $book->getCategoryName->name }}
+                    @if($book->category)
+                        {{ $book->category->name }}
                     @endif
                 </td>
-                <td>{{ $book->name }}</td>
+                <td><a href="{{ url('admin/book/show', $book->id) }}">{{ $book->name }}</a></td>
                 <td>{{ $book->iban }}</td>
                 <td>{{ $book->language }}</td>
             </tr>

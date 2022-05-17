@@ -25,11 +25,6 @@ return new class extends Migration
             $table->string('language', 50)->nullable();
             $table->timestamps();
         });
-
-        Schema::create('book_author', function (Blueprint $table) {
-            $table->foreignId('book_id')->constrained('books');
-            $table->foreignId('author_id')->constrained('authors');
-        });
     }
 
     /**
@@ -40,6 +35,5 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('books');
-        Schema::dropIfExists('book_author');
     }
 };

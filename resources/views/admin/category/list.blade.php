@@ -21,7 +21,7 @@
         @foreach($categories as $category)
             <tr>
                 <td>{{ $category->id }}</td>
-                <td>{{ $category->name }}</td>
+                <td><a href="{{ url('admin/category/show', $category->id) }}">{{ $category->name }}</a></td>
                 <td>
                     @if($category->parentCategoryName)
                         {{ $category->parentCategoryName->name }}

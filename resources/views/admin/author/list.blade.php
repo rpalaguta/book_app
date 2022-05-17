@@ -20,7 +20,7 @@
         @foreach($authors as $author)
             <tr>
                 <td>{{ $author->id }}</td>
-                <td>{{ $author->full_name }}</td>
+                <td><a href="{{ url('admin/author/show', $author->id) }}">{{ $author->full_name }}</a></td>
                 <td>{{ $author->birthday }}</td>
             </tr>
         @endforeach

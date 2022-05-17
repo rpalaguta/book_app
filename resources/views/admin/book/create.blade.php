@@ -14,6 +14,18 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Authors:</strong>
+                    <select class="form-select @error('author_id') is-invalid @enderror" name="author_id[]" multiple>
+                        <option value="">--</option>
+                        @foreach($authors as $author)
+                            <option value="{{ $author->id }}">{{ $author->full_name }}</option>
+                        @endforeach
+                    </select>
+                    @error('author_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Category:</strong>
                     <select class="form-select @error('category_id') is-invalid @enderror" name="category_id">
                         <option value="">--</option>
@@ -52,8 +64,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Page:</strong>
-                    <input type="text" name="page" value="{{ old('page') }}" class="form-control @error('page') is-invalid @enderror" placeholder="Page">
-                    @error('page')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    <input type="text" name="pages" value="{{ old('pages') }}" class="form-control @error('pages') is-invalid @enderror" placeholder="Pages">
+                    @error('pages')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

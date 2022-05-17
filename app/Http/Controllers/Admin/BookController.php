@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -21,12 +23,15 @@ class BookController extends Controller
     public function create(Request $request): View|RedirectResponse
     {
         if ($request->isMethod('post')) {
-            $validated = $request->validate([
+             $request->validate([
                 'name' => 'required|between:2,255',
                 'category_id' => 'required',
             ]);
 
-            Book::create($validated);
+            $book = Book::create($request->all());
+
+            $authors = Author::find($request->post('author_id'));
+            $book->authors()->attach($authors);
 
             return redirect('admin/book')
                 ->with('success', 'Book created successfully!');
@@ -37,6 +42,13 @@ class BookController extends Controller
             ->get()
         ;
 
-        return view('admin.book.create', compact('categories'));
+        $authors = Author::all();
+
+        return view('admin.book.create', compact('categories', 'authors'));
+    }
+
+    public function show(Book $book): View
+    {
+        return view('admin.book.show', compact('book'));
     }
 }

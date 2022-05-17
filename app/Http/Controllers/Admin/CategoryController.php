@@ -20,11 +20,11 @@ class CategoryController extends Controller
     public function create(Request $request): RedirectResponse|View
     {
         if ($request->isMethod('post')) {
-            $validated = $request->validate([
+             $request->validate([
                 'name' => 'required|between:2,100',
             ]);
 
-            Category::create($validated);
+            Category::create($request->all());
 
             return redirect('admin/category')
                 ->with('success', 'Category created successfully!');
@@ -33,5 +33,10 @@ class CategoryController extends Controller
         $firstLevelCategories = Category::where('category_id', null)->get();
 
         return view('admin.category.create', compact('firstLevelCategories'));
+    }
+
+    public function show(Category $category): View
+    {
+        return view('admin.category.show', compact('category'));
     }
 }
