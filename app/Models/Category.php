@@ -22,7 +22,7 @@ class Category extends Model
 
     protected $softDelete = true;
 
-    public function parentCategoryName(): BelongsTo
+    public function parentCategory(): BelongsTo
     {
          return $this->belongsTo(Category::class, 'category_id');
     }

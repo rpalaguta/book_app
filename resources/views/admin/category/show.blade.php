@@ -19,8 +19,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Parent category:</strong>
-                @if($category->parentCategoryName)
-                    {{ $category->parentCategoryName->name }}
+                @if($category->parentCategory)
+                    {{ $category->parentCategory->name }}
                 @endif
             </div>
         </div>
