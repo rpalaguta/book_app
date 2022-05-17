@@ -22,8 +22,6 @@ class CategoryController extends Controller
         if ($request->isMethod('post')) {
             $validated = $request->validate([
                 'name' => 'required|between:2,100',
-                'category_id' => 'nullable',
-                'active' => 'boolean'
             ]);
 
             Category::create($validated);
