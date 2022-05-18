@@ -10,6 +10,9 @@
         <div class="col">
             <a href="{{ url('admin/book/create') }}" class="btn btn-primary">Create</a>
         </div>
+        <div class="col">
+            <a href="{{ route('admin.book.export') }}" class="btn btn-info">Export</a>
+        </div>
     </div>
     <table class="table">
         <tr>
@@ -18,6 +21,7 @@
             <td>Name</td>
             <td>IBAN</td>
             <td>Language</td>
+            <td>Actions</td>
         </tr>
         @foreach($books as $book)
             <tr>
@@ -30,6 +34,9 @@
                 <td><a href="{{ url('admin/book/show', $book->id) }}">{{ $book->name }}</a></td>
                 <td>{{ $book->iban }}</td>
                 <td>{{ $book->language }}</td>
+                <td>
+                    <a href="{{ route('admin.book.edit', $book->id) }}">Edit</a>
+                </td>
             </tr>
         @endforeach
     </table>

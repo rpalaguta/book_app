@@ -37,7 +37,7 @@ BookApp - perskaitytu knygų marketplace'as.
     - Sukurti knygą, priskirti kategoriją(-as), priskirti autorių(-ius)
     - Sukurti naują kategoriją
     - Sukurti naują autorių
-    - Redaguoti esamą knygą
+    - Redaguoti esamą knygą // isigyvendint
     - Ištrinti knygą (soft delete)
     - Peržiūrėti registruotus vartotojus, sukurti naują, redaguoti, blokuoti, ištrinti vartotoją
     - Sukurti redaguoti kategorijų sąrašą.
