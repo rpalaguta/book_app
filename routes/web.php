@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\HomeController as Admin;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,26 +25,47 @@ Route::get('/', [HomeController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/admin', [Admin::class, 'index'])->name('admin');
-Route::get('/admin/book', [BookController::class, 'index']);
+Route::prefix('/admin')->group(function () {
+    Route::get('/', [Admin::class, 'index'])->name('admin');
 
-Route::get('/admin/category', [CategoryController::class, 'list']);
-Route::get('/admin/category/show/{category}', [CategoryController::class, 'show']);
-Route::get('/admin/category/create', [CategoryController::class, 'create']);
-Route::post('/admin/category/create', [CategoryController::class, 'create']);
+    #category
+    Route::prefix('/category')->group(function () {
+        Route::get('/', [CategoryController::class, 'list']);
+        Route::get('/show/{category}', [CategoryController::class, 'show']);
+        Route::get('/create', [CategoryController::class, 'create']);
+        Route::post('/create', [CategoryController::class, 'create']);
+    });
 
-Route::get('/admin/author', [AuthorController::class, 'list']);
-Route::get('/admin/author/show/{author}', [AuthorController::class, 'show']);
-Route::get('/admin/author/create', [AuthorController::class, 'create'])->name('admin.author.create');
-Route::post('/admin/author/create', [AuthorController::class, 'create'])->name('admin.author.create');
+    #author
+    Route::prefix('/author')->group(function () {
+        Route::get('/', [AuthorController::class, 'list']);
+        Route::get('/show/{author}', [AuthorController::class, 'show']);
+        Route::get('/create', [AuthorController::class, 'create'])->name('admin.author.create');
+        Route::post('/create', [AuthorController::class, 'create'])->name('admin.author.create');
+    });
 
-Route::get('/admin/book', [BookController::class, 'list'])->name('admin.book');
-Route::get('/admin/book/show/{book}', [BookController::class, 'show'])->name('admin.book.show');
-Route::get('/admin/book/create', [BookController::class, 'create']);
-Route::post('/admin/book/create', [BookController::class, 'create']);
-Route::get('/admin/book/export', [BookController::class, 'export'])->name('admin.book.export');
-Route::match(['get', 'post'],'/admin/book/edit/{book}', [BookController::class, 'edit'])->name('admin.book.edit');
-Route::match(['get', 'post'], '/admin/book/import', [BookController::class, 'import'])->name('admin.book.import');
+    #book
+    Route::prefix('/book')->group(function () {
+        Route::get('/', [BookController::class, 'list'])->name('admin.book');
+        Route::get('/show/{book}', [BookController::class, 'show'])->name('admin.book.show');
+        Route::get('/create', [BookController::class, 'create']);
+        Route::post('/create', [BookController::class, 'create']);
+        Route::get('/export', [BookController::class, 'export'])->name('admin.book.export');
+        Route::delete('/delete/{book}', [BookController::class, 'destroy'])->name('admin.book.delete');
+        Route::match(['get', 'post'], '/edit/{book}', [BookController::class, 'edit'])->name('admin.book.edit');
+        Route::match(['get', 'post'], '/import', [BookController::class, 'import'])->name('admin.book.import');
+    });
+
+    #users
+    Route::prefix('/user')->group(function () {
+        Route::get('/', [UserController::class, 'list'])->name('admin.user');
+        Route::get('/blocked', [UserController::class, 'blockedList'])->name('admin.user.blocked');
+        Route::match(['get', 'post'], '/create', [UserController::class, 'create'])->name('admin.user.create');
+        Route::match(['get', 'post'], '/edit/{user}', [UserController::class, 'edit'])->name('admin.user.edit');
+        Route::post('block/{user}', [UserController::class, 'block'])->name('admin.user.block');
+        Route::post('unblock/{user}', [UserController::class, 'unblock'])->name('admin.user.unblock');
+    });
+});
 
 #admin/books - list
 #get admin/books/{book} -> view

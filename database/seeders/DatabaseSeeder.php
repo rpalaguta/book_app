@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
         $category->active = 1;
         $category->save();
 
-        Book::factory(9000)->create(['category_id' => $category->id]);
+        Book::factory(10)->create(['category_id' => $category->id]);
     }
 }

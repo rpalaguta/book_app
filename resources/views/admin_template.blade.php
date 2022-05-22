@@ -6,7 +6,9 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
-
+                <div class="card-title" style="padding:10px; font-size:24px">
+                    @yield('title')
+                </div>
                 <div class="card-body">
                     @yield('body')
                 </div>

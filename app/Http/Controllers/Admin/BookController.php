@@ -10,8 +10,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BookController extends Controller
@@ -20,9 +18,16 @@ class BookController extends Controller
 
     public function list(): View
     {
-        $books = Book::all();
+        $books = Book::withTrashed()->get();
 
         return view('admin.book.list', compact('books'));
+    }
+
+    public function destroy(Book $book): RedirectResponse
+    {
+        $book->delete();
+
+        return redirect(route('admin.book'))->with('success', 'Book deleted successfully!');
     }
 
     public function create(Request $request): View|RedirectResponse

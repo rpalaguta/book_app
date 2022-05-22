@@ -1,11 +1,7 @@
 @extends('admin_template')
 
 @section('body')
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+    @include('admin.shared.messages')
     <div class="row">
         <div class="col">
             <a href="{{ url('admin/book/create') }}" class="btn btn-primary">Create</a>
@@ -36,6 +32,11 @@
                 <td>{{ $book->language }}</td>
                 <td>
                     <a href="{{ route('admin.book.edit', $book->id) }}">Edit</a>
+                    <form action="{{ route('admin.book.delete', $book->id) }}" method="post">
+                        @csrf
+                        @method("delete")
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

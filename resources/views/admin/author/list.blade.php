@@ -1,11 +1,7 @@
 @extends('admin_template')
 
 @section('body')
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+    @include('admin.shared.messages')
     <div class="row">
         <div class="col">
             <a href="{{ route('admin.author.create') }}" class="btn btn-primary">Create</a>
