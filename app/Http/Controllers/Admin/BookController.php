@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\BookCreated;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
@@ -10,10 +11,18 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BookController extends Controller
 {
+    /*public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('role:ROLE_ADMIN');
+    }*/
+
     public const DELIMETER = ';';
 
     public function list(): View
@@ -42,6 +51,8 @@ class BookController extends Controller
 
             $authors = Author::find($request->post('author_id'));
             $book->authors()->attach($authors);
+
+            Mail::later(now()->addSeconds(30), new BookCreated($book, Auth::user()));
 
             return redirect('admin/book')
                 ->with('success', 'Book created successfully!');

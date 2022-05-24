@@ -62,16 +62,11 @@ class User extends Authenticatable
         return $builder->where('blocked', '=', 0);
     }
 
-    /**
-     * Get the user's permissions settgins
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function name(): Attribute
+    /*protected function name(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value . "is Duomenu bases",
             set: fn ($value) => $value . "Special",
         );
-    }
+    }*/
 }

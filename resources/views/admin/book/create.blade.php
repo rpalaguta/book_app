@@ -56,6 +56,13 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>SKU:</strong>
+                    <input type="text" name="sku" value="{{ old('sku') }}" class="form-control @error('iban') is-invalid @enderror" placeholder="SKU">
+                    @error('sku')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Year:</strong>
                     <input type="text" name="year" value="{{ old('year') }}" class="form-control @error('year') is-invalid @enderror" placeholder="Year">
                     @error('year')<div class="invalid-feedback">{{ $message }}</div>@enderror

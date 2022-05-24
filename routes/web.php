@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController as Admin;
 use App\Http\Controllers\HomeController;
+use App\Http\Middleware\RoleMiddleware;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
