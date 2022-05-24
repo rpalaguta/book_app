@@ -17,12 +17,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BookController extends Controller
 {
-    /*public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('role:ROLE_ADMIN');
-    }*/
-
     public const DELIMETER = ';';
 
     public function list(): View

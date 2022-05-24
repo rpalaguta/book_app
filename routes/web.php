@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeController as Admin;
 use App\Http\Controllers\HomeController;
+use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\RoleMiddleware;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,45 +28,49 @@ Route::get('/', [HomeController::class, 'index']);
 
 Auth::routes();
 
-Route::prefix('/admin')->group(function () {
-    Route::get('/', [Admin::class, 'index'])->name('admin');
+Route::group(['middleware' => ['auth']], function() {
+    Route::middleware([CheckRole::class . ':' . User::ROLE_ADMIN])->group(function () {
+        Route::prefix('/admin')->group(function () {
+            Route::get('/', [Admin::class, 'index'])->name('admin');
 
-    #category
-    Route::prefix('/category')->group(function () {
-        Route::get('/', [CategoryController::class, 'list']);
-        Route::get('/show/{category}', [CategoryController::class, 'show']);
-        Route::get('/create', [CategoryController::class, 'create']);
-        Route::post('/create', [CategoryController::class, 'create']);
-    });
+            #category
+            Route::prefix('/category')->group(function () {
+                Route::get('/', [CategoryController::class, 'list']);
+                Route::get('/show/{category}', [CategoryController::class, 'show']);
+                Route::get('/create', [CategoryController::class, 'create']);
+                Route::post('/create', [CategoryController::class, 'create']);
+            });
 
-    #author
-    Route::prefix('/author')->group(function () {
-        Route::get('/', [AuthorController::class, 'list']);
-        Route::get('/show/{author}', [AuthorController::class, 'show']);
-        Route::get('/create', [AuthorController::class, 'create'])->name('admin.author.create');
-        Route::post('/create', [AuthorController::class, 'create'])->name('admin.author.create');
-    });
+            #author
+            Route::prefix('/author')->group(function () {
+                Route::get('/', [AuthorController::class, 'list']);
+                Route::get('/show/{author}', [AuthorController::class, 'show']);
+                Route::get('/create', [AuthorController::class, 'create'])->name('admin.author.create');
+                Route::post('/create', [AuthorController::class, 'create'])->name('admin.author.create');
+            });
 
-    #book
-    Route::prefix('/book')->group(function () {
-        Route::get('/', [BookController::class, 'list'])->name('admin.book');
-        Route::get('/show/{book}', [BookController::class, 'show'])->name('admin.book.show');
-        Route::get('/create', [BookController::class, 'create']);
-        Route::post('/create', [BookController::class, 'create']);
-        Route::get('/export', [BookController::class, 'export'])->name('admin.book.export');
-        Route::delete('/delete/{book}', [BookController::class, 'destroy'])->name('admin.book.delete');
-        Route::match(['get', 'post'], '/edit/{book}', [BookController::class, 'edit'])->name('admin.book.edit');
-        Route::match(['get', 'post'], '/import', [BookController::class, 'import'])->name('admin.book.import');
-    });
+            #book
+            Route::prefix('/book')->group(function () {
+                Route::get('/', [BookController::class, 'list'])->name('admin.book');
+                Route::get('/show/{book}', [BookController::class, 'show'])->name('admin.book.show');
+                Route::get('/create', [BookController::class, 'create']);
+                Route::post('/create', [BookController::class, 'create']);
+                Route::get('/export', [BookController::class, 'export'])->name('admin.book.export');
+                Route::delete('/delete/{book}', [BookController::class, 'destroy'])->name('admin.book.delete');
+                Route::match(['get', 'post'], '/edit/{book}', [BookController::class, 'edit'])->name('admin.book.edit');
+                Route::match(['get', 'post'], '/import', [BookController::class, 'import'])->name('admin.book.import');
+            });
 
-    #users
-    Route::prefix('/user')->group(function () {
-        Route::get('/', [UserController::class, 'list'])->name('admin.user');
-        Route::get('/blocked', [UserController::class, 'blockedList'])->name('admin.user.blocked');
-        Route::match(['get', 'post'], '/create', [UserController::class, 'create'])->name('admin.user.create');
-        Route::match(['get', 'post'], '/edit/{user}', [UserController::class, 'edit'])->name('admin.user.edit');
-        Route::post('block/{user}', [UserController::class, 'block'])->name('admin.user.block');
-        Route::post('unblock/{user}', [UserController::class, 'unblock'])->name('admin.user.unblock');
+            #users
+            Route::prefix('/user')->group(function () {
+                Route::get('/', [UserController::class, 'list'])->name('admin.user');
+                Route::get('/blocked', [UserController::class, 'blockedList'])->name('admin.user.blocked');
+                Route::match(['get', 'post'], '/create', [UserController::class, 'create'])->name('admin.user.create');
+                Route::match(['get', 'post'], '/edit/{user}', [UserController::class, 'edit'])->name('admin.user.edit');
+                Route::post('block/{user}', [UserController::class, 'block'])->name('admin.user.block');
+                Route::post('unblock/{user}', [UserController::class, 'unblock'])->name('admin.user.unblock');
+            });
+        });
     });
 });
 
