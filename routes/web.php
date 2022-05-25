@@ -81,3 +81,7 @@ Route::group(['middleware' => ['auth']], function() {
 #put admin/books/{book} -> update
 #put admin/books/export -> update
 #put admin/books/import -> update
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
