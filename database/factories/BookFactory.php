@@ -24,6 +24,7 @@ class BookFactory extends Factory
             'pages' => $this->faker->numberBetween(1, 1000),
             'format' => $this->faker->randomElement(['pdf', 'html', 'book']),
             'language' => $this->faker->languageCode,
+            'sku' => uniqid()
         ];
     }
 }
