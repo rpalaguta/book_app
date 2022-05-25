@@ -8,6 +8,8 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\App\BookController as AppBookController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +68,9 @@ Route::prefix('/admin')->group(function () {
         Route::post('unblock/{user}', [UserController::class, 'unblock'])->name('admin.user.unblock');
     });
 });
+
+Route::get('/books', [AppBookController::class, 'index'])->name('app.books');
+Route::get('/books-list', [AppBookController::class, 'list'])->name('app.books-list');
 
 #admin/books - list
 #get admin/books/{book} -> view
