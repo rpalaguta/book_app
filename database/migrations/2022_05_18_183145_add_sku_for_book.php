@@ -13,20 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        //1 veiksmas pridedam neunikalu
-        //2 veiksmas prigeneruojam duomenu
-        //3 uzdedam fieldui unikaluma
         Schema::table('books', function (Blueprint $table) {
-            $table->string('sku');
-        });
-
-        foreach (Book::all() as $book) {
-            $book->sku = uniqid('sku');
-            $book->save();
-        }
-
-        Schema::table('books', function (Blueprint $table) {
-            $table->unique('sku');
+            $table->string('sku')->unique();
         });
     }
 
