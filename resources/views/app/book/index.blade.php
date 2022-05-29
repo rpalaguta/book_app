@@ -24,19 +24,45 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="category_name" class="form-label">Category name</label>
+                                <input type="text" class="form-control" id="category_name" placeholder="Name of the category...">
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="author" class="form-label">Author</label>
                                 <input type="text" class="form-control" id="author" placeholder="Name of the author...">
                             </div>
 
                             <div class="mb-3">
                                 <label for="category" class="form-label">Category</label>
-                                <select class="form-control" id="category" >
+                                <select class="form-control" id="category">
                                     <option value="">Select category</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Languages</label>
+                                <select class="form-control" id="language">
+                                    <option value="">Select language</option>
+                                    @foreach($languages as $language)
+                                        <option value="{{ $language }}">{{ $language }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="category" class="form-label">SORT BY</label>
+                                <select class="form-control" id="sort">
+                                    <option value="">-</option>
+                                    @foreach($sortingValues as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
 
                             <button id="search" type="button" class="btn btn-primary">Search</button>
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\AuthorUpdated;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use Illuminate\Contracts\View\View;
@@ -25,7 +26,8 @@ class AuthorController extends Controller
                 'last_name' => 'required|between:2,100',
             ]);
 
-            Author::create($request->all());
+            $author = Author::create($request->all());
+            AuthorUpdated::dispatch($author->id);
 
             return redirect('admin/author')
                 ->with('success', 'Author created successfully!');

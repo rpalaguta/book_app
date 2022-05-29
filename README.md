@@ -17,9 +17,9 @@ BookApp - perskaitytu knygų marketplace'as.
         - IBAN
         - Kategoriją
         - Autoriu
-    - Naujausios knygos
+    - Naujausios knygos -> [sortBy : createdAt ]
     - Naujausios parduotos knygos
-    - Naujausios ieškomos knygos
+    - Daugiausiai ieškomos knygos
 - Peržiūrėti knygos informaciją
   - Išvesti sąrašą vartotojų, kurie siūlo įsigyti knygą
   - Įsidėti knygą į krepšelį.

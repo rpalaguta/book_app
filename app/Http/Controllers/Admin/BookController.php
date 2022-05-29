@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\BookUpdated;
+use App\Events\BookViewed;
 use App\Http\Controllers\Controller;
 use App\Mail\BookCreated;
 use App\Models\Author;
@@ -22,6 +24,8 @@ class BookController extends Controller
     public function list(): View
     {
         $books = Book::withTrashed()->get();
+
+        BookViewed::dispatch($books->first(), new \DateTime());
 
         return view('admin.book.list', compact('books'));
     }
@@ -64,6 +68,8 @@ class BookController extends Controller
 
     public function edit(Book $book, Request $request): View|RedirectResponse
     {
+        BookViewed::dispatch($book, new \DateTime());
+
         if ($request->isMethod('post')) {
             $request->validate([
                 'name' => 'required|between:2,255',
@@ -75,6 +81,8 @@ class BookController extends Controller
             $book->authors()->detach();
             $authors = Author::find($request->post('author_id'));
             $book->authors()->attach($authors);
+
+            BookUpdated::dispatch($book->id);
 
             return redirect(route('admin.book.show', $book->id))
                 ->with('success', 'Book created successfully!');
@@ -187,6 +195,9 @@ class BookController extends Controller
 
     public function show(Book $book): View
     {
+        BookViewed::dispatch($book, new \DateTime());
+
+
         return view('admin.book.show', compact('book'));
     }
 }

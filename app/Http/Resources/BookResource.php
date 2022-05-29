@@ -12,7 +12,7 @@ class BookResource extends JsonResource
      * @param \Illuminate\Http\Request $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'name' => $this->name,
@@ -20,7 +20,12 @@ class BookResource extends JsonResource
             'category_id' => $this->category_id,
             'id' => $this->id,
             'sku' => $this->sku,
-            'authors' => AuthorResource::collection($this->authors)
+            'category_name' => $this->category ? $this->category->name : null,
+            'viewed_count' => $this->viewed_count,
+            'category' => $this->category,
+            'language' => $this->language,
+            'authors' => AuthorResource::collection($this->authors),
+            'created_at' => $this->created_at,
         ];
     }
 }
