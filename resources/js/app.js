@@ -1,7 +1,8 @@
 require('./bootstrap');
+require('./auction');
 
 $(document).ready(function () {
-    $('select').select2();
+    // $('select').select2();
 });
 
 const bookContainer = document.getElementById('bookContainer');

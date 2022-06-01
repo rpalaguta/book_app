@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/auctions', [AuctionController::class, 'index'])->name('api.auctions.index');
     Route::get('/auctions/{id}', [AuctionController::class, 'show'])->name('api.auctions.show');
-    Route::post('/seller/{sellerId}/auctions', [AuctionController::class, 'store'])->name('api.seller.auctions.create');
+    Route::post('/auctions', [AuctionController::class, 'store'])->name('api.seller.auctions.create');
     Route::put('/seller/{sellerId}/auctions/{auctionId}', [AuctionController::class, 'update'])->name('api.seller.auctions.update');
 });
 

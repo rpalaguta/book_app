@@ -7,6 +7,8 @@ use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookCollectionResource;
 use App\Models\Book;
 use App\Models\Category;
+use App\Services\Import\NewYorkTime\Importer;
+use App\Services\Import\Google\Importer as GoogleImporter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +19,11 @@ class BookController extends Controller
     private const SORT_BY_CREATED_AT_ASC = 'created_at_asc';
     private const SORT_BY_VIEW_COUNT_ASC = 'view_count_asc';
     private const SORT_BY_VIEW_COUNT_DESC = 'view_count_desc';
+
+    public function import(GoogleImporter $importer)
+    {
+        $importer->import();
+    }
 
     /**
      * Show the application book list

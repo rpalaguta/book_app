@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\App\BookController as AppBookController;
-
+use App\Http\Controllers\App\AuctionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,6 +77,8 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 Route::get('/books', [AppBookController::class, 'index'])->name('app.books');
+Route::get('/books/import', [AppBookController::class, 'import'])->name('app.books.import');
+Route::get('/auctions', [AuctionController::class, 'create'])->name('app.auctions');
 Route::get('/books-list', [AppBookController::class, 'list'])->name('app.books-list');
 
 #admin/books - list
