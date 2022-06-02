@@ -1,0 +1,15 @@
+{
+    "Category": "Kategorija",
+    "Name": "Pavadinimas",
+    "IBAN": "IBAN",
+    "Language": "Kalba :default_lang and :second",
+    "Actions": "Veiksmai",
+    "Name of the book...": "Knygos pavadinimas...",
+    "Category name": "Kategorijos pavadinimas",
+    "Name of the category...": "Name of the category...",
+    "Author": "Autorius",
+    "Languages": "Kalbos",
+    "Select language": "Pasirinkite kalbą",
+    "Select category": "Pasirinkite kategoriją",
+    "search.result.count.message": "Radome :count rezultatu"
+}

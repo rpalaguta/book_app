@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth']], function() {
             #book
             Route::prefix('/book')->group(function () {
                 Route::get('/', [BookController::class, 'list'])->name('admin.book');
-                Route::get('/show/{book}', [BookController::class, 'show'])->name('admin.book.show');
+                Route::get('/show/{id}', [BookController::class, 'show'])->name('admin.book.show');
                 Route::get('/create', [BookController::class, 'create']);
                 Route::post('/create', [BookController::class, 'create']);
                 Route::get('/export', [BookController::class, 'export'])->name('admin.book.export');
@@ -92,3 +92,4 @@ Route::get('/books-list', [AppBookController::class, 'list'])->name('app.books-l
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale');

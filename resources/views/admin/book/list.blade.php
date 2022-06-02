@@ -13,11 +13,11 @@
     <table class="table">
         <tr>
             <td>ID</td>
-            <td>Category</td>
-            <td>Name</td>
-            <td>IBAN</td>
-            <td>Language</td>
-            <td>Actions</td>
+            <td>{{ __('Category') }}</td>
+            <td>{{ __('Name') }}</td>
+            <td>{{ __('IBAN') }}</td>
+            <td>{{ __('Language') }}</td>
+            <td>{{ __('Actions') }}</td>
         </tr>
         @foreach($books as $book)
             <tr>

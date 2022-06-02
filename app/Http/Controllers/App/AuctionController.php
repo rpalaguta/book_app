@@ -5,6 +5,7 @@ namespace App\Http\Controllers\App;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Request;
 
 class AuctionController extends Controller
 {

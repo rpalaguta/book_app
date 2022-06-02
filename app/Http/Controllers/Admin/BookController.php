@@ -13,13 +13,17 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BookController extends Controller
 {
     public const DELIMETER = ';';
+    private const BOOK_CACHE_TTL = 86400;
+    private const BOOK_CACHE_KEY_PATTERN = 'book_%s';
 
     public function list(): View
     {
@@ -27,7 +31,10 @@ class BookController extends Controller
 
         BookViewed::dispatch($books->first(), new \DateTime());
 
-        return view('admin.book.list', compact('books'));
+        return view('admin.book.list', [
+            'books' => $books,
+            'count' => 30
+        ]);
     }
 
     public function destroy(Book $book): RedirectResponse
@@ -83,6 +90,9 @@ class BookController extends Controller
             $book->authors()->attach($authors);
 
             BookUpdated::dispatch($book->id);
+
+            Cache::forget(sprintf(self::BOOK_CACHE_KEY_PATTERN, $book->id));
+            //cache()->forget(sprintf(self::BOOK_CACHE_KEY_PATTERN, $book->id));
 
             return redirect(route('admin.book.show', $book->id))
                 ->with('success', 'Book created successfully!');
@@ -193,11 +203,43 @@ class BookController extends Controller
 
     }
 
-    public function show(Book $book): View
+    public function show(int $id): View
     {
+        /*$cacheKey = sprintf(self::BOOK_CACHE_KEY_PATTERN, $id);
+
+        if ($book = Cache::get($cacheKey)) {
+            return view('admin.book.show', [
+                'book' => $book
+            ]);
+        }
+
+        $book = Book::find($id);
+        Cache::add($cacheKey, $book, self::BOOK_CACHE_TTL);*/
+
+        //dd(Cache::tags(['admin', 'book'])->get(sprintf(self::BOOK_CACHE_KEY_PATTERN, $id)));
+
+        /*$book = Cache::tags(['admin', 'book'])->remember(
+            sprintf(self::BOOK_CACHE_KEY_PATTERN, $id),
+            self::BOOK_CACHE_TTL,
+            function () use ($id) {
+                return Book::find($id);
+        });*/
+
+        $book = Cache::remember(
+            sprintf(self::BOOK_CACHE_KEY_PATTERN, $id),
+            self::BOOK_CACHE_TTL,
+            function () use ($id) {
+                return Book::find($id);
+            });
+
         BookViewed::dispatch($book, new \DateTime());
 
-
         return view('admin.book.show', compact('book'));
+    }
+
+    public function removeCache()
+    {
+        // Remove all cache
+        Cache::flush();
     }
 }

@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Services\Import\NewYorkTime\Importer;
 use App\Services\Import\Google\Importer as GoogleImporter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\App;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Request;
 
