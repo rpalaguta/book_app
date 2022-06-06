@@ -1,0 +1,14 @@
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:46:30"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:50:24"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:52:36"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:56:22"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:56:34"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:56:47"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:57:17"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:57:41"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:59:25"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 17:59:51"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 18:01:26"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 18:01:45"}
+{"entity_id":1,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 18:41:02"}
+{"entity_id":2,"event_class":"App\\Events\\BookUpdated","datetime":"2022-06-02 18:46:37"}
