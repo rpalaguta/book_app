@@ -9,14 +9,20 @@ use App\Mail\BookCreated;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
+use App\Services\PriceFormatter;
+use http\Exception;
+use Illuminate\Http\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BookController extends Controller
@@ -24,10 +30,18 @@ class BookController extends Controller
     public const DELIMETER = ';';
     private const BOOK_CACHE_TTL = 86400;
     private const BOOK_CACHE_KEY_PATTERN = 'book_%s';
+    private const BOOK_LIST_CACHE_KEY_PATTERN = 'book_list_v2';
 
     public function list(): View
     {
-        $books = Book::withTrashed()->get();
+        $books = Cache::remember(
+            self::BOOK_LIST_CACHE_KEY_PATTERN,
+            self::BOOK_CACHE_TTL,
+            function () {
+                return Book::withTrashed()->with('category')->get();
+            });
+
+        //$books = Book::withTrashed()->with('category')->get();
 
         BookViewed::dispatch($books->first(), new \DateTime());
 
@@ -47,9 +61,11 @@ class BookController extends Controller
     public function create(Request $request): View|RedirectResponse
     {
         if ($request->isMethod('post')) {
-             $request->validate([
+
+            $request->validate([
                 'name' => 'required|between:2,255',
                 'category_id' => 'required',
+                'image|mimes:jpeg,jpg,png:max:4096',
             ]);
 
             $book = Book::create($request->all());
@@ -57,7 +73,14 @@ class BookController extends Controller
             $authors = Author::find($request->post('author_id'));
             $book->authors()->attach($authors);
 
+            //$path = Storage::putFile('public/books', new File($request->book_image));
+            $imagePath = $request->file('book_image')->store('public/books');
+            $book->image = $imagePath;
+            $book->save();
+
             Mail::later(now()->addSeconds(30), new BookCreated($book, Auth::user()));
+            Cache::forget(sprintf(self::BOOK_LIST_CACHE_KEY_PATTERN));
+            Log::notice('Book created new book');
 
             return redirect('admin/book')
                 ->with('success', 'Book created successfully!');
@@ -205,6 +228,9 @@ class BookController extends Controller
 
     public function show(int $id): View
     {
+        //$price = (new PriceFormatter())->format(6);
+        //dump($price);
+
         /*$cacheKey = sprintf(self::BOOK_CACHE_KEY_PATTERN, $id);
 
         if ($book = Cache::get($cacheKey)) {
@@ -231,6 +257,7 @@ class BookController extends Controller
             function () use ($id) {
                 return Book::find($id);
             });
+
 
         BookViewed::dispatch($book, new \DateTime());
 

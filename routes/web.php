@@ -26,7 +26,7 @@ use App\Http\Controllers\App\AuctionController;
 
 Route::redirect('/home', '/');
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'home']);
 
 Auth::routes();
 

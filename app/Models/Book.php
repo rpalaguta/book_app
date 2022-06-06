@@ -22,6 +22,8 @@ class Book extends Model
         'updated_at'
     ];
 
+    //protected $with = ['category'];
+
     public function authors()
     {
         return $this->belongsToMany(Author::class);
@@ -29,7 +31,7 @@ class Book extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class);
     }
 
     public function auctions(): hasMany

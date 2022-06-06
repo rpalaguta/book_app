@@ -1,7 +1,7 @@
 @extends('admin_template')
 
 @section('body')
-    <form action="{{ url('admin/book/create') }}" method="post">
+    <form action="{{ url('admin/book/create') }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="row">
@@ -87,6 +87,13 @@
                     <strong>Language:</strong>
                     <input type="text" name="language" value="{{ old('language') }}" class="form-control @error('language') is-invalid @enderror" placeholder="Language">
                     @error('language')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Image:</strong>
+                    <input type="file" name="book_image" class="form-control @error('book_image') is-invalid @enderror" placeholder="Image" accept="image/jpeg, image/png">
+                    @error('book_image')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center pt-3">
