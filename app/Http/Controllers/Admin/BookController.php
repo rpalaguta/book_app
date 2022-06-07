@@ -73,8 +73,11 @@ class BookController extends Controller
             $authors = Author::find($request->post('author_id'));
             $book->authors()->attach($authors);
 
-            //$path = Storage::putFile('public/books', new File($request->book_image));
-            $imagePath = $request->file('book_image')->store('public/books');
+            $imagePath = Storage::disk('digitalocean')->putFile('public/books', $request->file('book_image'));
+            //$imagePath = $request->file('book_image')->store('public/books');
+            //$imagePath = Storage::putFile('books', new File($request->book_image));
+            //$imagePath = Storage::putFile('books', $request->file('book_image'));
+            //$book->image = Storage::disk('digitalocean')->url($imagePath);
             $book->image = $imagePath;
             $book->save();
 
@@ -112,7 +115,13 @@ class BookController extends Controller
             $authors = Author::find($request->post('author_id'));
             $book->authors()->attach($authors);
 
-            BookUpdated::dispatch($book->id);
+            if ($request->file('book_image')) {
+                $imagePath = Storage::disk('digitalocean')->putFile('public/books', $request->file('book_image'));
+                $book->image = $imagePath;
+                $book->save();
+            }
+
+            //BookUpdated::dispatch($book->id);
 
             Cache::forget(sprintf(self::BOOK_CACHE_KEY_PATTERN, $book->id));
             //cache()->forget(sprintf(self::BOOK_CACHE_KEY_PATTERN, $book->id));
@@ -126,6 +135,17 @@ class BookController extends Controller
             'authors' => Author::all(),
             'book' => $book
         ]);
+    }
+
+    public function deleteImage(Book $book)
+    {
+        Storage::disk('digitalocean')->delete($book->image);
+
+        $book->image = null;
+        $book->save();
+
+        return redirect(route('admin.book.edit', $book->id))
+            ->with('success', 'Image deleted!');
     }
 
     public function import(Request $request): View|RedirectResponse

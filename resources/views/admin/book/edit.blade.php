@@ -2,7 +2,7 @@
 
 @section('body')
     <h1> Edit book </h1>
-    <form action="{{ route('admin.book.edit', $book->id) }}" method="post">
+    <form action="{{ route('admin.book.edit', $book->id) }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="row">
@@ -89,6 +89,21 @@
                     @error('language')<div class="invalid-feedback">{{ $message }}</div>@enderror
                 </div>
             </div>
+
+            @if ($book->image)
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
+                    <img src="{{ Storage::disk('digitalocean')->url($book->image) }}" width="200">
+                    <a href="{{ route('admin.book.delete.image', $book->id) }}">Delete</a>
+                </div>
+            @else
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Image:</strong>
+                    <input type="file" name="book_image" class="form-control @error('book_image') is-invalid @enderror" placeholder="Image" accept="image/jpeg, image/png">
+                    @error('book_image')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                </div>
+            </div>
+            @endif
             <div class="col-xs-12 col-sm-12 col-md-12 text-center pt-3">
                 <button type="submit" class="btn btn-primary">Save</button>
             </div>

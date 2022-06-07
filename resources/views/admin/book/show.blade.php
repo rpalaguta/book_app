@@ -68,5 +68,8 @@
                 {{ $book->language }}
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <img src="{{ Storage::disk('digitalocean')->url($book->image) }}" width="200">
+        </div>
     </div>
 @endsection

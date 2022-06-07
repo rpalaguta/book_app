@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function() {
                 Route::post('/create', [BookController::class, 'create']);
                 Route::get('/export', [BookController::class, 'export'])->name('admin.book.export');
                 Route::delete('/delete/{book}', [BookController::class, 'destroy'])->name('admin.book.delete');
+                Route::get('/delete/image/{book}', [BookController::class, 'deleteImage'])->name('admin.book.delete.image');
                 Route::match(['get', 'post'], '/edit/{book}', [BookController::class, 'edit'])->name('admin.book.edit');
                 Route::match(['get', 'post'], '/import', [BookController::class, 'import'])->name('admin.book.import');
             });
