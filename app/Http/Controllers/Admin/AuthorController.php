@@ -24,7 +24,7 @@ class AuthorController extends Controller
              $request->validate([
                 'first_name' => 'required|between:2,100',
                 'last_name' => 'required|between:2,100',
-            ]);
+             ]);
 
             $author = Author::create($request->all());
             AuthorUpdated::dispatch($author->id);

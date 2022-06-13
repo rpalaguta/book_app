@@ -1,0 +1,17 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+    - phpstan-baseline.neon
+
+parameters:
+    level: 6
+    phpVersion: 80100
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    paths:
+        - app/
+    excludePaths:
+        analyse:
+            - app/Providers
+            - app/Service
+    scanDirectories:
+        - vendor

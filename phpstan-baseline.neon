@@ -1,0 +1,141 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: app/Http/Controllers/API/AuctionController.php
+
+		-
+			message: "#^Relation 'category' is not found in App\\\\Models\\\\Book model\\.$#"
+			count: 1
+			path: app/Http/Controllers/Admin/BookController.php
+
+		-
+			message: "#^Property App\\\\Models\\\\User\\:\\:\\$blocked \\(int\\) does not accept false\\.$#"
+			count: 1
+			path: app/Http/Controllers/Admin/UserController.php
+
+		-
+			message: "#^Property App\\\\Models\\\\User\\:\\:\\$blocked \\(int\\) does not accept true\\.$#"
+			count: 1
+			path: app/Http/Controllers/Admin/UserController.php
+
+		-
+			message: "#^Property App\\\\Models\\\\User\\:\\:\\$settings \\(Illuminate\\\\Support\\\\Collection\\|null\\) does not accept string\\|false\\.$#"
+			count: 1
+			path: app/Http/Controllers/Admin/UserController.php
+
+		-
+			message: "#^PHPDoc tag @return with type Illuminate\\\\Contracts\\\\Support\\\\Renderable is not subtype of native type Illuminate\\\\View\\\\View\\.$#"
+			count: 1
+			path: app/Http/Controllers/App/BookController.php
+
+		-
+			message: "#^Relation 'authors' is not found in App\\\\Models\\\\Book model\\.$#"
+			count: 1
+			path: app/Http/Controllers/App/BookController.php
+
+		-
+			message: "#^Relation 'category' is not found in App\\\\Models\\\\Book model\\.$#"
+			count: 1
+			path: app/Http/Controllers/App/BookController.php
+
+		-
+			message: "#^Relation 'category' is not found in App\\\\Models\\\\Book model\\.$#"
+			count: 1
+			path: app/Http/Controllers/HomeController.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\AuctionResource\\:\\:\\$book\\.$#"
+			count: 1
+			path: app/Http/Resources/AuctionResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\AuctionResource\\:\\:\\$id\\.$#"
+			count: 1
+			path: app/Http/Resources/AuctionResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\AuctionResource\\:\\:\\$price\\.$#"
+			count: 1
+			path: app/Http/Resources/AuctionResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\AuctionResource\\:\\:\\$quantity\\.$#"
+			count: 1
+			path: app/Http/Resources/AuctionResource.php
+
+		-
+			message: "#^PHPDoc tag @return with type array\\|Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\|JsonSerializable is not subtype of native type array\\.$#"
+			count: 1
+			path: app/Http/Resources/AuctionResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\AuthorResource\\:\\:\\$first_name\\.$#"
+			count: 1
+			path: app/Http/Resources/AuthorResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\AuthorResource\\:\\:\\$last_name\\.$#"
+			count: 1
+			path: app/Http/Resources/AuthorResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$authors\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$category\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$category_id\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$created_at\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$description\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$id\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$language\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$name\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$sku\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Http\\\\Resources\\\\BookResource\\:\\:\\$viewed_count\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^PHPDoc tag @return with type array\\|Illuminate\\\\Contracts\\\\Support\\\\Arrayable\\|JsonSerializable is not subtype of native type array\\.$#"
+			count: 1
+			path: app/Http/Resources/BookResource.php
+
+		-
+			message: "#^Negated boolean expression is always false\\.$#"
+			count: 1
+			path: app/Listeners/BookUpdatedListener.php

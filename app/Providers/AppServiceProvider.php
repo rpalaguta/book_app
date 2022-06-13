@@ -7,6 +7,7 @@ use App\Services\Import\Google\Importer;
 use App\Services\Import\ImporterContext;
 use App\Services\Import\NewYorkTime\Client;
 use App\Services\Import\PegasasImporter;
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use App\Services\Import\NewYorkTime\Importer as NewYorkTime;
 
@@ -36,6 +37,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CompositeImporter::class, function () {
             return new CompositeImporter($this->app->tagged('importers'));
         });
+
+        if ($this->app->isLocal()) {
+            $this->app->register(IdeHelperServiceProvider::class);
+        }
     }
 
     /**

@@ -8,11 +8,13 @@ use Illuminate\Queue\SerializesModels;
 
 class AuthorUpdated
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
-    public $id;
+    public int $id;
 
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
     }

@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -33,7 +32,7 @@ class UserController extends Controller
             $blocked = $request->get('blocked', false);
             $data = $request->validate([
                 'name' => 'required|between:2,100',
-                'role_id' => 'required'
+                'role_id' => 'required',
             ]);
             $user->update($data);
 
@@ -66,7 +65,7 @@ class UserController extends Controller
                 'email' => 'required|email|unique:users',
                 'name' => 'required|between:2,100',
                 'password' => 'required',
-                'role_id' => 'required'
+                'role_id' => 'required',
             ]);
             $data['password'] = Hash::make($data['password']);
             /** @var User $user */

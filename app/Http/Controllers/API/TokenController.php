@@ -17,7 +17,7 @@ class TokenController extends Controller
             $request->all(),
             [
                 'email' => 'required|email',
-                'password' => 'required'
+                'password' => 'required',
             ]
         );
 
@@ -28,12 +28,12 @@ class TokenController extends Controller
         /** @var User $user */
         $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response(['error' => 'Invalid credentials provided'], 400);
+        if (null !== $user && Hash::check($request->password, $user->password)) {
+            return [
+                'token' => $user->createToken('login')->plainTextToken,
+            ];
         }
 
-        return [
-            'token' => $user->createToken('login')->plainTextToken
-        ];
+        return response(['error' => 'Invalid credentials provided'], 400);
     }
 }

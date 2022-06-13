@@ -19,3 +19,6 @@ yarn-error.log
 /storage/framework/sessions/*
 /storage/framework/testing/*
 /storage/framework/views/*
+
+.phpcs-cache
+

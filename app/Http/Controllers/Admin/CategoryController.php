@@ -22,7 +22,7 @@ class CategoryController extends Controller
         if ($request->isMethod('post')) {
              $request->validate([
                 'name' => 'required|between:2,100',
-            ]);
+             ]);
 
             Category::create($request->all());
 

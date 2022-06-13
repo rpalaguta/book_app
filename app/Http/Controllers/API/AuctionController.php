@@ -24,7 +24,7 @@ class AuctionController extends Controller
         /** @var Auction $auction */
         $auction = Auction::find($id);
 
-        if ($auction) {
+        if (null !== $auction) {
             return new AuctionResource($auction);
         }
 
@@ -47,11 +47,12 @@ class AuctionController extends Controller
             return response(['errors' => $validation->errors()], 400);
         }
 
-        $auction = new Auction();
+        /*$auction = new Auction();
         $auction->price = $request->price;
         $auction->enabled = $request->enabled;
         $auction->quantity = $request->quantity;
-        $auction->book_id = $request->book_id;
+        $auction->book_id = $request->book_id;*/
+        $auction = Auction::create($request->all());
         $auction->user_id = Auth::user()->id;
         $auction->save();
 
@@ -83,9 +84,10 @@ class AuctionController extends Controller
             return response(['errors' => $validation->errors()], 400);
         }
 
-        $auction->price = $request->price;
+        /*$auction->price = $request->price;
         $auction->enabled = $request->enabled;
-        $auction->quantity = $request->quantity;
+        $auction->quantity = $request->quantity;*/
+        $auction->update($request->all());
         $auction->save();
 
         return new AuctionResource($auction);

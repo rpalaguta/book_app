@@ -2,28 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Events\BookUpdated;
 use App\Events\BookViewed;
 use App\Http\Controllers\Controller;
 use App\Mail\BookCreated;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
-use App\Services\PriceFormatter;
-use http\Exception;
-use Illuminate\Http\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 class BookController extends Controller
 {
@@ -39,7 +34,8 @@ class BookController extends Controller
             self::BOOK_CACHE_TTL,
             function () {
                 return Book::withTrashed()->with('category')->get();
-            });
+            }
+        );
 
         //$books = Book::withTrashed()->with('category')->get();
 
@@ -47,10 +43,14 @@ class BookController extends Controller
 
         return view('admin.book.list', [
             'books' => $books,
-            'count' => 30
+            'count' => 30,
         ]);
     }
 
+    /**
+     * @param Book $book
+     * @return RedirectResponse
+     */
     public function destroy(Book $book): RedirectResponse
     {
         $book->delete();
@@ -61,7 +61,6 @@ class BookController extends Controller
     public function create(Request $request): View|RedirectResponse
     {
         if ($request->isMethod('post')) {
-
             $request->validate([
                 'name' => 'required|between:2,255',
                 'category_id' => 'required',
@@ -133,11 +132,11 @@ class BookController extends Controller
         return view('admin.book.edit', [
             'categories' => Category::whereNull('category_id')->with('childrenCategories')->get(),
             'authors' => Author::all(),
-            'book' => $book
+            'book' => $book,
         ]);
     }
 
-    public function deleteImage(Book $book)
+    public function deleteImage(Book $book): RedirectResponse
     {
         Storage::disk('digitalocean')->delete($book->image);
 
@@ -158,7 +157,8 @@ class BookController extends Controller
             $header = [];
             $records = [];
 
-            if (($handle = fopen($filePath, "r")) !== false) {
+            $handle = fopen($filePath, "r");
+            if ($handle !== false) {
                 while (($data = fgetcsv($handle, null, self::DELIMETER)) !== false) {
                     if ($row === 1) {
                         $header = $data;
@@ -169,7 +169,6 @@ class BookController extends Controller
                     $bookData['category_id'] = 1;
                     $records[] = $bookData;
                     $row++;
-
                 }
                 fclose($handle);
             }
@@ -196,7 +195,7 @@ class BookController extends Controller
                     'year',
                     'pages',
                     'language',
-                    'format'
+                    'format',
                 ],
                 self::DELIMETER
             );
@@ -213,7 +212,7 @@ class BookController extends Controller
                             $book->year,
                             $book->pages,
                             $book->language,
-                            $book->format
+                            $book->format,
                         ],
                         self::DELIMETER
                     );
@@ -223,27 +222,26 @@ class BookController extends Controller
             fclose($output);
         }, 'file.csv');
 
-//        ini_set('memory_limit', '12M');
+        //        ini_set('memory_limit', '12M');
 
-//        $books = Book::all();
-//        $results = [];
+        //        $books = Book::all();
+        //        $results = [];
 
-//        Book::chunk(200, function ($books) {
-//            foreach ($books as $book) {
-//                $results[] = [
-//                    'name' => $book->name,
-//                    'description' => $book->description
-//                ];
-//            }
-//        });
+        //        Book::chunk(200, function ($books) {
+        //            foreach ($books as $book) {
+        //                $results[] = [
+        //                    'name' => $book->name,
+        //                    'description' => $book->description
+        //                ];
+        //            }
+        //        });
 
-//        foreach (Book::cursor() as $book) {
-//            $results[] = [
-//                    'name' => $book->name,
-//                    'description' => $book->description
-//                ];
-//        }
-
+        //        foreach (Book::cursor() as $book) {
+        //            $results[] = [
+        //                    'name' => $book->name,
+        //                    'description' => $book->description
+        //                ];
+        //        }
     }
 
     public function show(int $id): View
@@ -276,15 +274,15 @@ class BookController extends Controller
             self::BOOK_CACHE_TTL,
             function () use ($id) {
                 return Book::find($id);
-            });
-
+            }
+        );
 
         BookViewed::dispatch($book, new \DateTime());
 
         return view('admin.book.show', compact('book'));
     }
 
-    public function removeCache()
+    public function removeCache(): void
     {
         // Remove all cache
         Cache::flush();
