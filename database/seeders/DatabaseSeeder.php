@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\News;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -28,5 +29,6 @@ class DatabaseSeeder extends Seeder
         $category->save();
 
         Book::factory(10)->create(['category_id' => $category->id]);
+        News::factory(10)->create();
     }
 }

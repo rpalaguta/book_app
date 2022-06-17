@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\App\BookController as AppBookController;
 use App\Http\Controllers\App\AuctionController;
+use App\Http\Controllers\NewsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,8 +32,8 @@ Route::get('/', [HomeController::class, 'home']);
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::middleware([CheckRole::class . ':' . User::ROLE_ADMIN])->group(function () {
+// Route::group(['middleware' => ['auth']], function() {
+    // Route::middleware([CheckRole::class . ':' . User::ROLE_ADMIN])->group(function () {
         Route::prefix('/admin')->group(function () {
             Route::get('/', [Admin::class, 'index'])->name('admin');
 
@@ -74,8 +76,8 @@ Route::group(['middleware' => ['auth']], function() {
                 Route::post('unblock/{user}', [UserController::class, 'unblock'])->name('admin.user.unblock');
             });
         });
-    });
-});
+    // });
+// });
 
 Route::get('/books', [AppBookController::class, 'index'])->name('app.books');
 Route::get('/books/import', [AppBookController::class, 'import'])->name('app.books.import');
@@ -94,3 +96,15 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale');
+
+
+#Savarankiška užduotis
+
+Route::prefix('/news')->group(function () {
+    Route::get('/', [NewsController::class, 'list'])->name('news.home');
+    Route::match(['get', 'post'], '/create', [NewsController::class, 'create'])->name('news.create');
+    Route::match(['get', 'post'], '/edit/{article}', [NewsController::class, 'edit'])->name('news.edit');
+    // Route::get('/show/{id}', [NewsController::class, 'show'])->name('news.show');
+
+    // Route::delete('/delete/{article}', [BookController::class, 'destroy'])->name('news.delete');
+});

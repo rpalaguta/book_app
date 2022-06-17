@@ -22,6 +22,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.user') }}">Users</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('news.home') }}">News</a>
+                </li>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">

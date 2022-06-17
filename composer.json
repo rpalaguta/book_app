@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "andres-montanez/magallanes": "^5.0",
         "guzzlehttp/guzzle": "^7.0",
         "laravel/framework": "^9.11",
         "laravel/sanctum": "^2.15",
@@ -23,9 +24,7 @@
         "nunomaduro/larastan": "^2.0",
         "phpunit/phpunit": "^9.5.10",
         "slevomat/coding-standard": "~7.0",
-        "spatie/laravel-ignition": "^1.0",
-        "phpstan/phpstan":  "1.7.*",
-        "squizlabs/php_codesniffer": "*"
+        "spatie/laravel-ignition": "^1.0"
     },
     "autoload": {
         "psr-4": {

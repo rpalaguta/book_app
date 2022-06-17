@@ -4,8 +4,77 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e415036a23f2213d7a467abdd290b4c",
+    "content-hash": "f97d39b8b4cedbb1a34cb9212f8fe3a8",
     "packages": [
+        {
+            "name": "andres-montanez/magallanes",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/andres-montanez/Magallanes.git",
+                "reference": "0ccc2bbe4530d1a16004cbe9f5f6f47c3953a422"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/andres-montanez/Magallanes/zipball/0ccc2bbe4530d1a16004cbe9f5f6f47c3953a422",
+                "reference": "0ccc2bbe4530d1a16004cbe9f5f6f47c3953a422",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": "^2.5",
+                "php": "^8.0",
+                "symfony/console": "^6.0",
+                "symfony/event-dispatcher": "^6.0",
+                "symfony/filesystem": "^6.0",
+                "symfony/finder": "^6.0",
+                "symfony/process": "^6.0",
+                "symfony/yaml": "^6.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.5",
+                "phpstan/phpstan": "^1.5",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "suggest": {
+                "ext-posix": "*"
+            },
+            "bin": [
+                "bin/mage"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0.x-dev",
+                    "dev-discovery-one": "5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrés Montañez",
+                    "email": "andresmontanez@gmail.com"
+                }
+            ],
+            "description": "The Deployment Tool for PHP Applications",
+            "homepage": "https://magephp.com",
+            "keywords": [
+                "deployment"
+            ],
+            "support": {
+                "issues": "https://github.com/andres-montanez/Magallanes/issues",
+                "source": "https://github.com/andres-montanez/Magallanes/tree/5.0.0"
+            },
+            "time": "2022-04-15T14:17:14+00:00"
+        },
         {
             "name": "aws/aws-crt-php",
             "version": "v1.0.2",
@@ -3511,6 +3580,69 @@
             "time": "2022-02-25T11:15:52+00:00"
         },
         {
+            "name": "symfony/filesystem",
+            "version": "v6.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/filesystem.git",
+                "reference": "3132d2f43ca799c2aa099f9738d98228c56baa5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/3132d2f43ca799c2aa099f9738d98228c56baa5d",
+                "reference": "3132d2f43ca799c2aa099f9738d98228c56baa5d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-mbstring": "~1.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides basic utilities for the filesystem",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/filesystem/tree/v6.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-05-21T13:34:40+00:00"
+        },
+        {
             "name": "symfony/finder",
             "version": "v6.1.0",
             "source": {
@@ -5149,6 +5281,80 @@
                 }
             ],
             "time": "2022-05-21T13:34:40+00:00"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v6.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "84ce4f9d2d68f306f971a39d949d8f4b5550dba2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/84ce4f9d2d68f306f971a39d949d8f4b5550dba2",
+                "reference": "84ce4f9d2d68f306f971a39d949d8f4b5550dba2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "conflict": {
+                "symfony/console": "<5.4"
+            },
+            "require-dev": {
+                "symfony/console": "^5.4|^6.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "bin": [
+                "Resources/bin/yaml-lint"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Loads and dumps YAML files",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v6.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-04-15T14:25:02+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -6793,16 +6999,16 @@
         },
         {
             "name": "nunomaduro/larastan",
-            "version": "v2.1.10",
+            "version": "v2.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/larastan.git",
-                "reference": "e65978bc2ec0a6177cc1e00d9ed053a877d9e8d3"
+                "reference": "8514c5ec475b440702f08cf804e73cd55a05f622"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/e65978bc2ec0a6177cc1e00d9ed053a877d9e8d3",
-                "reference": "e65978bc2ec0a6177cc1e00d9ed053a877d9e8d3",
+                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/8514c5ec475b440702f08cf804e73cd55a05f622",
+                "reference": "8514c5ec475b440702f08cf804e73cd55a05f622",
                 "shasum": ""
             },
             "require": {
@@ -6818,7 +7024,7 @@
                 "mockery/mockery": "^1.4.4",
                 "php": "^8.0.2",
                 "phpmyadmin/sql-parser": "^5.5",
-                "phpstan/phpstan": "^1.7.10"
+                "phpstan/phpstan": "^1.7.12"
             },
             "require-dev": {
                 "nikic/php-parser": "^4.13.2",
@@ -6867,7 +7073,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/larastan/issues",
-                "source": "https://github.com/nunomaduro/larastan/tree/v2.1.10"
+                "source": "https://github.com/nunomaduro/larastan/tree/v2.1.11"
             },
             "funding": [
                 {
@@ -6887,7 +7093,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-06-09T21:29:45+00:00"
+            "time": "2022-06-13T21:45:42+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -7302,16 +7508,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.6.2",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "76150ae7512439b4e6903db834e4a327596b617d"
+                "reference": "4a07085f74cb1f3fc7103efa537d9f00ebb74ec7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/76150ae7512439b4e6903db834e4a327596b617d",
-                "reference": "76150ae7512439b4e6903db834e4a327596b617d",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/4a07085f74cb1f3fc7103efa537d9f00ebb74ec7",
+                "reference": "4a07085f74cb1f3fc7103efa537d9f00ebb74ec7",
                 "shasum": ""
             },
             "require": {
@@ -7341,22 +7547,22 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.6.2"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.6.3"
             },
-            "time": "2022-06-10T09:29:33+00:00"
+            "time": "2022-06-14T11:40:08+00:00"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.7.13",
+            "version": "1.7.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "86ffc063bfd8f264c9eba568e84b0225a6090d09"
+                "reference": "e6f145f196a59c7ca91ea926c87ef3d936c4305f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/86ffc063bfd8f264c9eba568e84b0225a6090d09",
-                "reference": "86ffc063bfd8f264c9eba568e84b0225a6090d09",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e6f145f196a59c7ca91ea926c87ef3d936c4305f",
+                "reference": "e6f145f196a59c7ca91ea926c87ef3d936c4305f",
                 "shasum": ""
             },
             "require": {
@@ -7382,7 +7588,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.7.13"
+                "source": "https://github.com/phpstan/phpstan/tree/1.7.14"
             },
             "funding": [
                 {
@@ -7402,7 +7608,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-13T15:15:39+00:00"
+            "time": "2022-06-14T13:09:35+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

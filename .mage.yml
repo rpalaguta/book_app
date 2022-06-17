@@ -1,0 +1,41 @@
+magephp:
+    log_dir: /var/www/html/mage-logs
+    log_limit: 10
+    environments:
+        production:
+            ssh:
+              port: 22
+              flags: -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i /var/www/html/deployment/key_test
+              timeout: 60
+            user: root
+            branch: master
+            from: ./
+            host_path: /var/www/
+            symlink: laravel
+            releases: 10
+            exclude:
+                - ./.vscode
+                - ./node_modules
+                - ./.gitignore
+                - ./storage/app/*
+                - ./storage/logs/*
+                - ./storage/framework/cache/*
+                - ./storage/framework/sessions/*
+                - ./storage/framework/views/*
+                - ./storage/debugbar
+                - ./tests
+            hosts:
+                - 146.190.229.184
+            pre-deploy:
+                - git/update
+                # - composer/install
+                - composer/dump-autoload
+            on-deploy:
+                - fs/copy: { from: '/var/www/shared/.env', to: '.env' }
+                - exec: { cmd: 'cp /var/www/shared/.env .env', desc: 'Copying .env file' }
+                - exec: { cmd: 'touch new_file_from_deployment', desc: 'Create new file for testing purposes' }
+                - exec: { cmd: 'chmod -R 777 ./storage', desc: 'Set storage permissions' }
+                - exec: { cmd: 'php8.1 artisan migrate --force', desc: 'Migrating database' }
+            on-release:
+            post-release:
+            post-deploy:

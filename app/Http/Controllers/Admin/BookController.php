@@ -181,110 +181,110 @@ class BookController extends Controller
         return view('admin.book.import');
     }
 
-    public function export(): StreamedResponse
-    {
-        return response()->streamDownload(function () {
-            $output = fopen('php://output', 'w');
-            fputcsv(
-                $output,
-                [
-                    'sku',
-                    'name',
-                    'description',
-                    'iban',
-                    'year',
-                    'pages',
-                    'language',
-                    'format',
-                ],
-                self::DELIMETER
-            );
+    // public function export():StreamedResponse
+    // {
+    //     return response()->streamDownload(function () {
+    //         $output = fopen('php://output', 'w');
+    //         fputcsv(
+    //             $output,
+    //             [
+    //                 'sku',
+    //                 'name',
+    //                 'description',
+    //                 'iban',
+    //                 'year',
+    //                 'pages',
+    //                 'language',
+    //                 'format',
+    //             ],
+    //             self::DELIMETER
+    //         );
 
-            Book::chunk(200, function ($books) use ($output) {
-                foreach ($books as $book) {
-                    fputcsv(
-                        $output,
-                        [
-                            $book->sku,
-                            $book->name,
-                            $book->description,
-                            $book->iban,
-                            $book->year,
-                            $book->pages,
-                            $book->language,
-                            $book->format,
-                        ],
-                        self::DELIMETER
-                    );
-                }
-            });
+    //         Book::chunk(200, function ($books) use ($output) {
+    //             foreach ($books as $book) {
+    //                 fputcsv(
+    //                     $output,
+    //                     [
+    //                         $book->sku,
+    //                         $book->name,
+    //                         $book->description,
+    //                         $book->iban,
+    //                         $book->year,
+    //                         $book->pages,
+    //                         $book->language,
+    //                         $book->format,
+    //                     ],
+    //                     self::DELIMETER
+    //                 );
+    //             }
+    //         });
 
-            fclose($output);
-        }, 'file.csv');
+    //         fclose($output);
+    //     }, 'file.csv');
 
-        //        ini_set('memory_limit', '12M');
+    //     //        ini_set('memory_limit', '12M');
 
-        //        $books = Book::all();
-        //        $results = [];
+    //     //        $books = Book::all();
+    //     //        $results = [];
 
-        //        Book::chunk(200, function ($books) {
-        //            foreach ($books as $book) {
-        //                $results[] = [
-        //                    'name' => $book->name,
-        //                    'description' => $book->description
-        //                ];
-        //            }
-        //        });
+    //     //        Book::chunk(200, function ($books) {
+    //     //            foreach ($books as $book) {
+    //     //                $results[] = [
+    //     //                    'name' => $book->name,
+    //     //                    'description' => $book->description
+    //     //                ];
+    //     //            }
+    //     //        });
 
-        //        foreach (Book::cursor() as $book) {
-        //            $results[] = [
-        //                    'name' => $book->name,
-        //                    'description' => $book->description
-        //                ];
-        //        }
-    }
+    //     //        foreach (Book::cursor() as $book) {
+    //     //            $results[] = [
+    //     //                    'name' => $book->name,
+    //     //                    'description' => $book->description
+    //     //                ];
+    //     //        }
+    // }
 
-    public function show(int $id): View
-    {
-        //$price = (new PriceFormatter())->format(6);
-        //dump($price);
+    // public function show(int $id): View
+    // {
+    //     //$price = (new PriceFormatter())->format(6);
+    //     //dump($price);
 
-        /*$cacheKey = sprintf(self::BOOK_CACHE_KEY_PATTERN, $id);
+    //     /*$cacheKey = sprintf(self::BOOK_CACHE_KEY_PATTERN, $id);
 
-        if ($book = Cache::get($cacheKey)) {
-            return view('admin.book.show', [
-                'book' => $book
-            ]);
-        }
+    //     if ($book = Cache::get($cacheKey)) {
+    //         return view('admin.book.show', [
+    //             'book' => $book
+    //         ]);
+    //     }
 
-        $book = Book::find($id);
-        Cache::add($cacheKey, $book, self::BOOK_CACHE_TTL);*/
+    //     $book = Book::find($id);
+    //     Cache::add($cacheKey, $book, self::BOOK_CACHE_TTL);*/
 
-        //dd(Cache::tags(['admin', 'book'])->get(sprintf(self::BOOK_CACHE_KEY_PATTERN, $id)));
+    //     //dd(Cache::tags(['admin', 'book'])->get(sprintf(self::BOOK_CACHE_KEY_PATTERN, $id)));
 
-        /*$book = Cache::tags(['admin', 'book'])->remember(
-            sprintf(self::BOOK_CACHE_KEY_PATTERN, $id),
-            self::BOOK_CACHE_TTL,
-            function () use ($id) {
-                return Book::find($id);
-        });*/
+    //     /*$book = Cache::tags(['admin', 'book'])->remember(
+    //         sprintf(self::BOOK_CACHE_KEY_PATTERN, $id),
+    //         self::BOOK_CACHE_TTL,
+    //         function () use ($id) {
+    //             return Book::find($id);
+    //     });*/
 
-        $book = Cache::remember(
-            sprintf(self::BOOK_CACHE_KEY_PATTERN, $id),
-            self::BOOK_CACHE_TTL,
-            function () use ($id) {
-                return Book::find($id);
-            }
-        );
+    //     $book = Cache::remember(
+    //         sprintf(self::BOOK_CACHE_KEY_PATTERN, $id),
+    //         self::BOOK_CACHE_TTL,
+    //         function () use ($id) {
+    //             return Book::find($id);
+    //         }
+    //     );
 
-        BookViewed::dispatch($book, new \DateTime());
+    //     BookViewed::dispatch($book, new \DateTime());
 
-        return view('admin.book.show', compact('book'));
-    }
+    //     return view('admin.book.show', compact('book'));
+    // }
 
-    public function removeCache(): void
-    {
-        // Remove all cache
-        Cache::flush();
-    }
+    // public function removeCache(): void
+    // {
+    //     // Remove all cache
+    //     Cache::flush();
+    // }
 }
